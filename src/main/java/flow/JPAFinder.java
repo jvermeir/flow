@@ -11,14 +11,8 @@ import java.util.stream.Collectors;
 public class JPAFinder {
     private final Collection<CtType<?>> allTypes;
 
-    public JPAFinder(String sourcePath) {
-        Launcher launcher = new Launcher();
-        launcher.addInputResource(sourcePath);
-        launcher.getEnvironment().setAutoImports(true);
-        launcher.getEnvironment().setNoClasspath(true);
-        launcher.buildModel();
-        CtModel model = launcher.getModel();
-        allTypes = model.getAllTypes();
+    public JPAFinder(Collection<CtType<?>> allTypes) {
+        this.allTypes = allTypes;
     }
 
     public List<CtType<?>> getJPAMethods() {

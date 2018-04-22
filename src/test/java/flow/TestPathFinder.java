@@ -1,34 +1,45 @@
 package flow;
 
-import org.apache.commons.io.FileUtils;
-import org.eclipse.jdt.internal.core.hierarchy.TypeHierarchy;
 import org.junit.jupiter.api.Test;
-import spoon.Launcher;
-import spoon.reflect.CtModel;
-import spoon.reflect.declaration.CtClass;
+import spoon.reflect.declaration.CtType;
+import spoon.support.reflect.declaration.CtClassImpl;
 
-import java.io.File;
-import java.util.Arrays;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestPathFinder {
 
-    public void test3PathQueriesAreFoundInCase1() {
-//        PathFinder pathFinder = new PathFinder("./src/test/resources/case1");
-//        Path firstPath = new Path (new Method("FirstRepository.java", "findByUuid"));
-//        firstPath.append(new Method("FirstController.java", "getErrors"));
-//
-//        Path thirdPath = new Path (new Method("ThirdRepository.java","findAllById"));
-//        thirdPath.append(new Method("ThirdController.java", "getThirdById"));
-//
-//        Path fourthPath = new Path(new Method("FourthRepository.java","findAllOfUser"));
-//        fourthPath.append(new Method("FourthController.java", "retrieveAllFourthByUuid"));
-//
-//        List<Path> paths = pathFinder.getPaths();
-//        assertEquals(Arrays.asList(firstPath, thirdPath, fourthPath), paths);
+    @Test
+    public void dummyPlaceholderTest() {
+        assertEquals(1,1);
     }
+
+    public void test3PathQueriesAreFoundInCase1() {
+        PathFinder pathFinder = new PathFinder("./flowtest/src/main/java/case1");
+        List<List<CtType<?>>> paths = pathFinder.getPaths();
+        // TODO: find out if this might lead to useful results...
+//        CtTypeMember ctTypeMember = pathFinder.listOfTypes.get(2).getTypeMembers().get(2);
+//        CtMethod<?> method = ctTypeMember.getDeclaringType().getMethods().iterator().next();
+//        CtStatement statement = method.getBody().getStatement(0);
+//        List<CtElement> elements = statement.
+        //.getBody().getStatements().get(0).getDefaultExpression().getExecutable().getSimpleName();
+//        assertEquals(3, paths.size());
+    }
+
+    private List<CtType<?>> constructPath() {
+        List<CtType<?>> path = new ArrayList<>();
+        CtType x = new CtClassImpl();
+        x.setSimpleName("FirstController");
+        path.add(x);
+        return path;
+    }
+
+    /*
+    a method in a class uses a method on an instance of a class until a database method is reached.
+    a database method is a CtMethodImpl in the typeMembers list of a jparepo class. ctmethodImpl's have a simpleName attribute.
+
+    allTypes.get(2).getTypeMembers().get(2).getBody().getStatements().get(0).getDefaultExpression().getExecutable().getSimpleName() -> findByUuid
+     */
 }

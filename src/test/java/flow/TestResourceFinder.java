@@ -10,8 +10,8 @@ import static org.junit.jupiter.api.Assertions.fail;
 public class TestResourceFinder {
     @Test
     public void test5ResourcesAreFoundInCase1() {
-        ResourceFinder resourceFinder = new ResourceFinder("./src/test/resources/case1");
+        ResourceFinder resourceFinder = new ResourceFinder("./flowtest/src/main/java/case1");
         List<String> resources = resourceFinder.getResources();
-        assertEquals(3, resources.size());
+        assertEquals(4, resources.size());
     }
 }
