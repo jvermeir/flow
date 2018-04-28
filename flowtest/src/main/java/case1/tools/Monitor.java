@@ -17,25 +17,32 @@ public class Monitor {
     @Before("execution(* case1.controller.*Controller.*(..))")
     public void logControllerStart(JoinPoint joinPoint) {
         if (logger.isDebugEnabled()) {
-            log(joinPoint, "contollerStart");
+            log(joinPoint, "calling", "controller");
         }
     }
 
     @AfterReturning("execution(* case1.controller.*Controller.*(..))")
     public void logControllerEnd(JoinPoint joinPoint) {
         if (logger.isDebugEnabled()) {
-            log(joinPoint, "contollerEnd");
+            log(joinPoint, "returning", "controller");
+        }
+    }
+
+    @Before("execution(* case1.db.*Repository.*(..))")
+    public void logDBAccessEntry(JoinPoint joinPoint) {
+        if (logger.isDebugEnabled()) {
+            log(joinPoint, "calling", "repository");
         }
     }
 
     @AfterReturning("execution(* case1.db.*Repository.*(..))")
-    public void logDBAccess(JoinPoint joinPoint) {
+    public void logDBAccessExit(JoinPoint joinPoint) {
         if (logger.isDebugEnabled()) {
-            log(joinPoint, "repository");
+            log(joinPoint, "returning", "repository");
         }
     }
 
-    private void log(JoinPoint joinPoint, String type) {
-        logger.debug("{\"timestamp\": \"{}\",\"calling\": \"{}\", \"Thread\": \"{}\", \"type\": \"{}\"}", System.currentTimeMillis(), joinPoint, Thread.currentThread(), type);
+    private void log(JoinPoint joinPoint, String phase, String type) {
+        logger.debug("{\"timestamp\": \"{}\",\"calling\": \"{}\", \"Thread\": \"{}\", \"type\": \"{}\", \"phase\": \"{}\"}", System.currentTimeMillis(), joinPoint, Thread.currentThread(), type, phase);
     }
 }

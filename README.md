@@ -23,6 +23,17 @@ mvn clean install
 java -jar target/flow-test.jar
 ```
 
+## Collect test data
+
+This step is necessary for the Python utility in src/main/analysis. analyze_log.py needs a logfile generated during use of flow-test.
+```
+cd ./src/main/analysis
+./poorMansLoadTest.sh
+
+```
+This accesses some of the REST services in flow-test, creating the file /tmp/flow.log that can be used for analysis
+using analyze_log.py.
+
 ## Experiments
 
 The code in flow contains several experiments. 

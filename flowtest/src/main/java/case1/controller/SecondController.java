@@ -23,7 +23,7 @@ public class SecondController {
     @Consumes(MediaType.APPLICATION_JSON)
     @ResponseBody
     @ApiOperation(value = "update second")
-    public String updateFirst(@ApiParam(value = "Second to store") @RequestBody Second second) {
+    public String updateSecond(@ApiParam(value = "Second to store") @RequestBody Second second) {
         dao.save(second);
         return "";
     }

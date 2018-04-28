@@ -1,6 +1,0 @@
-{
-  "execution(String case1.controller.FirstController.updateFirst(First))>execution(Object org.springframework.data.repository.CrudRepository.save(Object))>execution(String case1.controller.FirstController.updateFirst(First))",
-  "execution(First case1.controller.FirstController.getFirst(String))>execution(First case1.db.FirstRepository.findByUuid(String))>execution(First case1.controller.FirstController.getFirst(String))",
-  "execution(Second case1.controller.SecondController.getSecond(String))>execution(Second case1.db.SecondRepository.findByUuid(String))>execution(Second case1.controller.SecondController.getSecond(String))",
-  "execution(String case1.controller.SecondController.updateFirst(Second))>execution(Object org.springframework.data.repository.CrudRepository.save(Object))>execution(String case1.controller.SecondController.updateFirst(Second))"
-}
