@@ -5,9 +5,7 @@ Identify the main code paths through a Spring Boot application.
 ## Import in IntelliJ
 
 ```
-Create a new project:
-
-import ./pom.xml 
+Create a new project by importing pom.xml from the root of this folder
 
 Add the test project 'flow-test'"
 
@@ -27,12 +25,16 @@ java -jar target/flow-test.jar
 
 This step is necessary for the Python utility in src/main/analysis. analyze_log.py needs a logfile generated during use of flow-test.
 ```
-cd ./src/main/analysis
-./poorMansLoadTest.sh
-
+./src/main/analysis/poorMansLoadTest.sh
 ```
-This accesses some of the REST services in flow-test, creating the file /tmp/flow.log that can be used for analysis
+This accesses the REST services in flow-test, creating the file /tmp/flow.log that can be used for analysis
 using analyze_log.py.
+Run analyze_log.py and generate a png:
+```
+python ./src/main/analysis/analyze_log.py
+./src/main/analysis/print.sh
+```
+
 
 ## Experiments
 
@@ -46,5 +48,3 @@ callers of a method seems difficult.
 Both libraries work on either compiled code or sources, trying to reliably analyze code. This appears more
 difficult than expected, so another approach would be to run an application that logs relevant method calls.
 Flowtest is intended to be run as an application, logging the calls that result from accessing the api. 
-
-TODO: add Python stuff. 
