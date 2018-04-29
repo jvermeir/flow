@@ -21,10 +21,10 @@ def get_callpath(path):
 
 def get_segment(segment):
     line = segment["calling"]
-    method_call = line.split(' ')[1]
-    call_without_param_list = method_call.split('(')[0]
-    name_parts = call_without_param_list.split('.')
-    return (name_parts[len(name_parts)-1], name_parts[len(name_parts)-2], segment["phase"])
+    method_call = line.split(' ')[1][:-1]
+    return_type = line.split(' ')[0].split('(')[1]
+    name_parts = method_call.split('.')
+    return (name_parts[len(name_parts)-1], name_parts[len(name_parts)-2], segment["phase"], return_type)
 
 
 def is_last_message_of_path(line):
@@ -50,10 +50,10 @@ def print_method_calls(paths, output):
                 index = index + 1
             else:
                 if index > number_of_nodes:
-                    output.write(segment[1] + " --> ext: " + segment[0] + "\n")
+                    output.write(segment[1] + " --> ext: " + segment[3] + "\n")
                 else:
                     next = path[index]
-                    output.write(current[1] + " --> " + next[1] + ":" + current[0] + "\n")
+                    output.write(current[1] + " --> " + next[1] + ":" + current[3] + "\n")
                     current = segment
                     index = index + 1
 
