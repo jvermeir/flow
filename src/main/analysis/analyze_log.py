@@ -1,6 +1,7 @@
 import json
 import sys
 
+
 def add_line_to_result_map(line, partial_paths, paths):
     thread = line['Thread']
     path = partial_paths.get(thread)
