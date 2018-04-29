@@ -67,25 +67,27 @@ def print_method_calls(paths, output):
                     index = index + 1
 
 
-def print_seq_diag(paths):
-    with open("test.sd", "w") as output:
+def print_seq_diag(paths, output_file_name):
+    with open(output_file_name, "w") as output:
         output.write("@startuml\n")
         print_method_calls(paths, output)
         output.write("@enduml\n")
 
 
 def main():
-    if len(sys.argv) < 2:
-        print "Usage: python analyze_log.py <full path to log file>"
+    if len(sys.argv) < 3:
+        print "Usage: python analyze_log.py <full path to log file> <output file name>"
         sys.exit(-1)
 
     log_file_name = sys.argv[1]
+    output_file_name = sys.argv[2]
     print "processing logfile: " + log_file_name
+    print "output in: " + output_file_name
     partial_paths = {}
     paths = set()
     messages = get_messages_from_log_file(log_file_name)
     [add_line_to_result_map(line, partial_paths, paths) for line in messages]
-    print_seq_diag(paths)
+    print_seq_diag(paths, output_file_name)
 
 
 if __name__ == "__main__":
