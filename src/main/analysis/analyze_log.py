@@ -2,6 +2,14 @@ import json
 import sys
 
 
+class Segment:
+    def __init__(self, method_name, class_name, phase, return_type):
+        self.method_name = method_name
+        self.class_name = class_name
+        self.phase = phase
+        self.return_type = return_type
+
+
 def add_line_to_result_map(line, partial_paths, paths):
     thread = line['Thread']
     path = partial_paths.get(thread)
@@ -20,11 +28,12 @@ def get_callpath(path):
 
 
 def get_segment(segment):
-    line = segment["calling"]
-    method_call = line.split(' ')[1][:-1]
-    return_type = line.split(' ')[0].split('(')[1]
-    name_parts = method_call.split('.')
-    return (name_parts[len(name_parts)-1], name_parts[len(name_parts)-2], segment["phase"], return_type)
+    calling = segment["calling"].split(' ')
+    method_call = calling[1][:-1]
+    return_type = calling[0].split('(')[1]
+    method_call_parts = method_call.split('.')
+    num_parts = len(method_call_parts)
+    return Segment(method_call_parts[num_parts - 1], method_call_parts[num_parts - 2], segment["phase"], return_type)
 
 
 def is_last_message_of_path(line):
@@ -40,20 +49,20 @@ def get_messages_from_log_file(log_file_name):
 
 def print_method_calls(paths, output):
     for path in paths:
-        current = tuple(['ext','ext'])
+        current = Segment('ext', 'ext', 'calling', 'void')
         index = 1
         number_of_nodes = len(path) - 1
         for segment in path:
-            if segment[2] == "calling":
-                output.write(current[1] + " -> " + segment[1] + ":" + segment[0] + "\n")
+            if segment.phase == "calling":
+                output.write(current.class_name + " -> " + segment.class_name + ":" + segment.method_name + "\n")
                 current = segment
                 index = index + 1
             else:
                 if index > number_of_nodes:
-                    output.write(segment[1] + " --> ext: " + segment[3] + "\n")
+                    output.write(segment.class_name + " --> ext: " + segment.return_type + "\n")
                 else:
                     next = path[index]
-                    output.write(current[1] + " --> " + next[1] + ":" + current[3] + "\n")
+                    output.write(current.class_name + " --> " + next.class_name + ":" + current.return_type + "\n")
                     current = segment
                     index = index + 1
 
@@ -81,3 +90,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
