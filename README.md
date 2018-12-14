@@ -48,3 +48,5 @@ callers of a method seems difficult.
 Both libraries work on either compiled code or sources, trying to reliably analyze code. This appears more
 difficult than expected, so another approach would be to run an application that logs relevant method calls.
 Flowtest is intended to be run as an application, logging the calls that result from accessing the api. 
+
+![alt=sample output](https://github.com/jvermeir/flow/blob/master/flow_test.png)
