@@ -13,8 +13,7 @@ public interface SecondRepository extends JpaRepository<Second, Long> {
     @Query(value = "SELECT * FROM second WHERE second.uuid = :uuid", nativeQuery = true)
     Second findByUuid(@Param("uuid") String uuid);
 
-//    @Query(value = "SELECT count(*) FROM second", nativeQuery = true)
-//    Long count();
-
+    @Query(value = "UPDATE second set item = :item WHERE second.uuid = :uuid", nativeQuery = true)
+    Second updateItem(@Param("uuid") String uuid, @Param("item") int item);
 }
 

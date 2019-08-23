@@ -1,6 +1,7 @@
 package case1.core;
 
 import case1.db.SecondRepository;
+import org.springframework.context.annotation.Bean;
 
 public class SomeLogic {
     SecondRepository repository;

@@ -4,17 +4,12 @@ import org.apache.commons.io.FileUtils;
 import org.objectweb.asm.*;
 import org.objectweb.asm.commons.Method;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Enumeration;
 import java.util.List;
-import java.util.jar.JarEntry;
-import java.util.jar.JarFile;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import static org.objectweb.asm.Opcodes.ASM6;
 
 public class App {
     private String targetClass;

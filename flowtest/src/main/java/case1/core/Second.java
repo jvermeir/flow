@@ -17,6 +17,11 @@ public class Second {
 
     protected Second() { }
 
+    public Second (String uuid, int item) {
+        this.uuid = uuid;
+        this.item = item;
+    }
+
     public int getId() {
         return id;
     }
